@@ -1,9 +1,16 @@
 <template>
-  <div id="visualization"></div>
+  <div>
+    <div id="visualization"></div>
+    <!-- <div class="vis-project-group">
+      <span>5433</span>
+      <span>Metrotramvia via Adriano...</span>
+    </div> -->
+  </div>
 </template>
 
 <script>
-import { Timeline } from "vis-timeline/standalone";
+import { DataSet } from "vis-data/peer";
+import { Timeline } from "vis-timeline/peer";
 export default {
   name: "visualization",
 
@@ -32,7 +39,8 @@ export default {
       items: [
         {
           group: 1,
-          content: "Project Scope of work Non editable",
+          content: "",
+          className: "vis-item-project-scope",
           align: "left",
           start: "2022-03-01",
           end: "2022-04-30",
@@ -41,7 +49,7 @@ export default {
         },
         {
           group: 12,
-          content: "Employee alocated time editable",
+          content: "Mirco alocated time editable",
           align: "left",
           start: "2022-03-01",
           end: "2022-03-15",
@@ -50,7 +58,7 @@ export default {
         },
         {
           group: 13,
-          content: "Employee alocated time editable",
+          content: "Alan alocated time editable",
           align: "left",
           start: "2022-03-05",
           end: "2022-03-18",
@@ -59,7 +67,7 @@ export default {
         },
         {
           group: 14,
-          content: "Employee alocated time editable",
+          content: "Paolo alocated time editable",
           align: "left",
           start: "2022-03-15",
           end: "2022-03-30",
@@ -78,7 +86,7 @@ export default {
         timeAxis: { scale: "day", step: 1 },
         itemsAlwaysDraggable: true,
         onMove: function(e) {
-          console.log("hello there", e);
+          console.log("hello timeline peer", e);
         }
       },
       timeline: null
@@ -86,13 +94,35 @@ export default {
   },
 
   mounted() {
-    this.timeline = new Timeline(document.getElementById("visualization"));
-    this.timeline.setGroups(this.groups);
-    this.timeline.setItems(this.items);
-    this.timeline.setOptions(this.options);
+    const container = document.getElementById("visualization");
+    const groups = new DataSet(this.groups);
+    const items = new DataSet(this.items);
+    this.timeline = new Timeline(container, items, groups, this.options);
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style>
+.vis-item-project-scope {
+  background-color: #104272;
+  color: white;
+  border-color: #104272;
+  border-radius: 10%;
+  font-size: 10px;
+  max-height: 10px;
+}
+
+.vis-project-group {
+  display: flex;
+  background-color: #2fa4ff;
+  border-left: solid 3px #104272;
+  max-width: 150px;
+  text-align: center;
+  align-content: center;
+  color: white;
+}
+
+.vis-project-number {
+  height: 100%;
+}
+</style>

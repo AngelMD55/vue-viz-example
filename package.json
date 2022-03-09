@@ -18,7 +18,8 @@
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-visjs": "^0.6.0",
-    "vue-visjs-timeline": "^1.1.0"
+    "vue-visjs-timeline": "^1.1.0",
+    "vue2vis": "0.0.18"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

@@ -1,12 +1,18 @@
 <template>
-  <div id="visualization"></div>
+  <div>
+    <timeline ref="timeline" :items="items" :groups="groups" :options="options">
+    </timeline>
+  </div>
 </template>
 
 <script>
-import { Timeline } from "vis-timeline/standalone";
+import { Timeline } from "vue2vis";
+// import "vue2vis/dist/vue2vis.css";
 export default {
-  name: "visualization",
-
+  name: "TimelineVisu",
+  components: {
+    Timeline
+  },
   data() {
     return {
       groups: [
@@ -35,7 +41,7 @@ export default {
           content: "Project Scope of work Non editable",
           align: "left",
           start: "2022-03-01",
-          end: "2022-04-30",
+          end: "2022-04-31",
           selectable: false,
           editable: false
         },
@@ -68,7 +74,7 @@ export default {
         }
       ],
       options: {
-        locale: "it",
+        locale: "it_IT",
         align: "left",
         autoResize: true,
         orientation: "top",
@@ -76,23 +82,13 @@ export default {
         start: "2022-03-01",
         showCurrentTime: false,
         timeAxis: { scale: "day", step: 1 },
-        itemsAlwaysDraggable: true,
+
         onMove: function(e) {
           console.log("hello there", e);
         }
-      },
-      timeline: null
+      }
     };
   },
-
-  mounted() {
-    this.timeline = new Timeline(document.getElementById("visualization"));
-    this.timeline.setGroups(this.groups);
-    this.timeline.setItems(this.items);
-    this.timeline.setOptions(this.options);
-  }
+  created() {}
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
